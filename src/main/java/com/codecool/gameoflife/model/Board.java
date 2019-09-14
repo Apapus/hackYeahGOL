@@ -4,6 +4,9 @@ public class Board {
 
     private Cell[][] board;
 
+    /*
+    This is the creation of an empty board
+     */
     public Board(int height, int width) {
         this.board = new Cell[height][width];
         for (int i = 0; i < height; i++) {

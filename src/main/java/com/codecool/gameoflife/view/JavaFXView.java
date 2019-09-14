@@ -28,7 +28,7 @@ public class JavaFXView implements Viewable {
 
     private Rectangle[][] viewBoard;
 
-    InputHandler inputHandler;
+    private InputHandler inputHandler;
 
     public JavaFXView(Stage stage, Board board) {
         gameInit(board);
@@ -43,12 +43,8 @@ public class JavaFXView implements Viewable {
         root.getChildren().add(btn);
         stage.setScene(new Scene(root, width, height));
         stage.show();
-        root.setOnMouseReleased(event -> {
-            handleMouseInput(event);
-        });
-        root.setOnKeyReleased(event -> {
-            handleKeyInput(event);
-        });
+        root.setOnMouseReleased(this::handleMouseInput);
+        root.setOnKeyReleased(this::handleKeyInput);
 
     }
 

@@ -4,8 +4,8 @@ import com.codecool.gameoflife.view.Viewable;
 
 public class SimpleInputHandler implements InputHandler {
 
-	Strategy game;
-	Viewable view;
+	private Strategy game;
+	private Viewable view;
 
 	public SimpleInputHandler(Strategy game, Viewable view){
 		this.game = game;

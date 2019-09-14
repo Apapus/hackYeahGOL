@@ -2,11 +2,13 @@ package com.codecool.gameoflife.controller;
 
 import com.codecool.gameoflife.model.Board;
 
+/**
+ * This is an implemented strategy to Conway's Game of Life:
+ * The rules are as follows:
+ * If a Cell is dead and has exactly 3 alive neighbours it comes alive
+ * If a Cell is alive and has LESS THAN 2 live neighbours or has MORE THAN 3 live neighbours, it dies.
+ */
 public class ConwaysGameOfLife implements Strategy{
-
-    private static final int MINIMAL_LIVE_NEIGHBOURS = 2;
-    private static final int MAXIMUM_LIVE_NEIGHBOURS = 3;
-    private static final int NUMBER_OF_REPRODUCING_MEMBERS = 3;
 
     private Board currentBoard;
 
