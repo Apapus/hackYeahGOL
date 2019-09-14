@@ -1,12 +1,13 @@
 package com.codecool.gameoflife.view;
 
-import com.codecool.gameoflife.controller.ConwaysGameOfLife;
+import com.codecool.gameoflife.controller.InputHandler;
 import com.codecool.gameoflife.model.Board;
-import com.codecool.gameoflife.model.Cell;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -14,8 +15,7 @@ import javafx.stage.Stage;
 
 public class JavaFXView implements Viewable {
 
-    private Stage primaryStage;
-    Group root = new Group();
+    private Group root = new Group();
 
     private int cellHeight;
     private int cellWidth;
@@ -28,10 +28,11 @@ public class JavaFXView implements Viewable {
 
     private Rectangle[][] viewBoard;
 
-    public JavaFXView(Stage stage, Board board) {
-        primaryStage = stage;
+    InputHandler inputHandler;
 
-        primaryStage.setTitle("Hello world");
+    public JavaFXView(Stage stage, Board board) {
+
+        stage.setTitle("Hello world");
 
         gameInit(board);
 
@@ -43,9 +44,32 @@ public class JavaFXView implements Viewable {
         });
 
         root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, width, height));
-        primaryStage.show();
+        stage.setScene(new Scene(root, width, height));
+        stage.show();
+        root.setOnMouseReleased(event -> {
+            handleMouseInput(event);
+        });
+        root.setOnKeyReleased(event -> {
+            handleKeyInput(event);
+        });
 
+    }
+
+    private void handleKeyInput(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.RIGHT)){
+            inputHandler.nextFrame();
+        }
+    }
+
+    private void handleMouseInput(MouseEvent event) {
+        if (inputHandler != null){
+            if (event.getTarget() instanceof Rectangle){
+                Rectangle targetRectangle = (Rectangle) event.getTarget();
+                int x_target = (int) targetRectangle.getX() / cellWidth;
+                int y_target = (int) targetRectangle.getY() / cellHeight;
+                inputHandler.handleCellChange(x_target, y_target);
+            }
+        }
     }
 
     private void gameInit(Board board) {
@@ -61,19 +85,6 @@ public class JavaFXView implements Viewable {
     }
 
     private void playGame() {
-//        Cell[][] board2 = new Cell[size][size];
-//        for (int i = 0; i < size; i++) {
-//            for (int j = 0; j < size; j++) {
-//                if ((i == 2 && j > 0 && j < 4)) {
-//                    board2[i][j] = new Cell(true);
-//                } else {
-//                    board2[i][j] = new Cell(false);
-//                }
-//            }
-//        }
-//        Viewable consoleView = new ConsoleView();
-//        Board second = new Board(board2);
-//        ConwaysGameOfLife gol = new ConwaysGameOfLife(second);
         for (Rectangle[] rectangleLine :
                 viewBoard) {
             for (Rectangle rectangle :
@@ -81,22 +92,20 @@ public class JavaFXView implements Viewable {
                 root.getChildren().add(rectangle);
             }
         }
-//        for (int i = 0; i < size; i++) {
-//            consoleView.printBoard(gol.getCurrentBoard());
-//            gol.makeStep();
-//        }
     }
 
     @Override
     public void printBoard(Board board) {
         for (int i = 0; i < board.getHeight(); i++) {
             for (int j = 0; j < board.getWidth(); j++) {
-                if (board.isCellAlive(i, j)){
-                    System.out.println("i " + i + " j " + j);
-                }
                 viewBoard[i][j].setFill(board.isCellAlive(i, j) ? alivePaint : deadPaint);
             }
         }
 
+    }
+
+    @Override
+    public void registerInputHandler(InputHandler inputHandler) {
+        this.inputHandler = inputHandler;
     }
 }

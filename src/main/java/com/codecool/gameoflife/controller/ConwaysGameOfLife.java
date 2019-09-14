@@ -2,7 +2,7 @@ package com.codecool.gameoflife.controller;
 
 import com.codecool.gameoflife.model.Board;
 
-public class ConwaysGameOfLife implements Strategy {
+public class ConwaysGameOfLife implements Strategy{
 
     private static final int MINIMAL_LIVE_NEIGHBOURS = 2;
     private static final int MAXIMUM_LIVE_NEIGHBOURS = 3;
@@ -43,7 +43,9 @@ public class ConwaysGameOfLife implements Strategy {
         currentBoard = nextBoard;
     }
 
+    @Override
     public Board getCurrentBoard(){
         return currentBoard;
     }
+
 }

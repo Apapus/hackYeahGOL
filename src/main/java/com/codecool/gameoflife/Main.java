@@ -1,6 +1,7 @@
 package com.codecool.gameoflife;
 
 import com.codecool.gameoflife.controller.ConwaysGameOfLife;
+import com.codecool.gameoflife.controller.SimpleInputHandler;
 import com.codecool.gameoflife.model.Board;
 import com.codecool.gameoflife.view.JavaFXView;
 import com.codecool.gameoflife.view.Viewable;
@@ -17,11 +18,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Board board = new Board(10,10);
         ConwaysGameOfLife gol = new ConwaysGameOfLife(board);
-        gol.getCurrentBoard().toggleField(1,1);
-        gol.getCurrentBoard().toggleField(1,2);
-        gol.getCurrentBoard().toggleField(1,3);
-        System.out.println(gol.getCurrentBoard());
         Viewable javaFxView = new JavaFXView(primaryStage, gol.getCurrentBoard());
+        SimpleInputHandler inputHandler = new SimpleInputHandler(gol, javaFxView);
+        javaFxView.registerInputHandler(inputHandler);
         javaFxView.printBoard(gol.getCurrentBoard());
     }
 }
