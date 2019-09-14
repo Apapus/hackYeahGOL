@@ -13,42 +13,16 @@ public class Board {
         }
     }
 
-    public Board(Cell[][] board) {
-        this.board = new Cell[board.length][board[0].length];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                this.board[i][j] = new Cell(board[i][j].isAlive());
-            }
-        }
-    }
-
     public int getNumberOfAliveNeighbours(int x, int y) {
-        int counter = 0;
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-                if (i != 0 || j != 0) {
-                    if (x + i >= 0 && x + i < board.length &&
-                            y + j >= 0 && y + j < board[0].length)
-                        if (board[x + i][y + j].isAlive()) {
-                            counter++;
-                        }
-                }
-            }
-        }
-        return counter;
+        return 0;
     }
 
     public void toggleField(int row, int column) {
-        if (row < board.length && row > 0 && column < board[row].length) {
             this.board[row][column].toggle();
-        }
     }
 
     public boolean isCellAlive(int row, int column) {
-        if (row < board.length && row > 0 && column < board[row].length) {
             return this.board[row][column].isAlive();
-        }
-        return false;
     }
 
     public int getHeight() {
@@ -61,18 +35,5 @@ public class Board {
 
     public Cell[][] getBoard() {
         return board;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (Cell[] cells : board) {
-            for (int j = 0; j < board[0].length; j++) {
-                builder.append(cells[j].toString());
-            }
-            builder.append("\n");
-        }
-
-        return builder.toString();
     }
 }

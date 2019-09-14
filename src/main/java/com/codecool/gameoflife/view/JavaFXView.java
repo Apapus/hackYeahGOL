@@ -31,9 +31,6 @@ public class JavaFXView implements Viewable {
     InputHandler inputHandler;
 
     public JavaFXView(Stage stage, Board board) {
-
-        stage.setTitle("Hello world");
-
         gameInit(board);
 
         Button btn = new Button();
