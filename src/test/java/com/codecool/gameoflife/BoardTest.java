@@ -1,8 +1,7 @@
 package com.codecool.gameoflife;
 
+import com.codecool.gameoflife.model.Board;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
     @Test
