@@ -14,12 +14,14 @@ public class SimpleInputHandler implements InputHandler {
 
 	@Override
 	public void handleCellChange(int x, int y) {
+		System.out.println("Change Cell requested");
 		game.getCurrentBoard().toggleField(y, x);
 		view.printBoard(game.getCurrentBoard());
 	}
 
 	@Override
 	public void nextFrame() {
+		System.out.println("Next frame requested");
 		game.makeStep();
 		view.printBoard(game.getCurrentBoard());
 	}

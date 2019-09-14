@@ -17,7 +17,7 @@ public class Cell {
     }
 
     void toggle() {
-        this.alive = !this.alive;
+        //Implement function that changes state of this cell
     }
 
     @Override

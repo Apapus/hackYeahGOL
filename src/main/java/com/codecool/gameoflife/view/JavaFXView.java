@@ -40,7 +40,7 @@ public class JavaFXView implements Viewable {
         btn.setText("Start!");
         btn.setOnAction(event -> {
             System.out.println("Hello!");
-            playGame();
+            addRectanglesToView();
         });
 
         root.getChildren().add(btn);
@@ -84,7 +84,7 @@ public class JavaFXView implements Viewable {
         }
     }
 
-    private void playGame() {
+    private void addRectanglesToView() {
         for (Rectangle[] rectangleLine :
                 viewBoard) {
             for (Rectangle rectangle :
@@ -101,7 +101,6 @@ public class JavaFXView implements Viewable {
                 viewBoard[i][j].setFill(board.isCellAlive(i, j) ? alivePaint : deadPaint);
             }
         }
-
     }
 
     @Override

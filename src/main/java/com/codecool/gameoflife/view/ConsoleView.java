@@ -11,6 +11,6 @@ public class ConsoleView implements Viewable {
 
     @Override
     public void registerInputHandler(InputHandler inputHandler) {
-
+        //ignore
     }
 }

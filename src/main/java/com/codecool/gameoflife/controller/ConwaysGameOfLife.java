@@ -16,31 +16,14 @@ public class ConwaysGameOfLife implements Strategy{
 
     @Override
     public boolean shouldBeAliveNextRound(int row, int column) {
-        int neighbours = currentBoard.getNumberOfAliveNeighbours(row, column);
-        if (currentBoard.isCellAlive(row, column)) {
-            if (neighbours < MINIMAL_LIVE_NEIGHBOURS || neighbours > MAXIMUM_LIVE_NEIGHBOURS) {
-                return false;
-            }
-        } else {
-            if (neighbours == NUMBER_OF_REPRODUCING_MEMBERS) {
-                return true;
-            }
-        }
-
-        return currentBoard.isCellAlive(row, column);
+        //Implement method that checks if that cell should be alive in next turn.
+        //Return true or false
+        return false;
     }
 
     @Override
     public void makeStep() {
-        Board nextBoard = new Board(currentBoard.getBoard());
-        for (int i = 0; i < currentBoard.getHeight(); i++) {
-            for (int j = 0; j < currentBoard.getWidth(); j++) {
-                if (currentBoard.isCellAlive(i, j) ^ shouldBeAliveNextRound(i, j)) {
-                    nextBoard.toggleField(i, j);
-                }
-            }
-        }
-        currentBoard = nextBoard;
+        //Implement method that generates next board.
     }
 
     @Override
